@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영독작 Lesson 4-1 분석 | 에듀케레 영수학원</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a2744; --gold:#c8a84b;
+  --navy-soft:#22335a; --line:#e4e7ee;
+  --bg:#f5f6f9; --ink:#222a3b; --muted:#6b7488;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;}
+a{color:inherit;text-decoration:none;}
+
+.sidebar{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--navy);
+  color:#fff;padding:34px 22px;overflow-y:auto;z-index:50;}
+.sb-brand{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.sb-acad{font-size:20px;font-weight:900;margin-top:6px;}
+.sb-lesson{font-size:13px;color:#c3ccdd;margin-top:4px;}
+.sb-rule{height:1px;background:rgba(255,255,255,.15);margin:24px 0;}
+.sb-nav button{display:block;width:100%;text-align:left;background:transparent;border:none;color:#cdd5e4;
+  font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;padding:13px 16px;border-radius:10px;
+  cursor:pointer;margin-bottom:6px;transition:.18s;}
+.sb-nav button:hover{background:var(--navy-soft);color:#fff;}
+.sb-nav button.active{background:var(--gold);color:var(--navy);font-weight:700;}
+.sb-num{display:inline-block;width:24px;font-weight:700;color:var(--gold);}
+.sb-nav button.active .sb-num{color:var(--navy);}
+.sb-foot{margin-top:30px;font-size:12px;color:#9aa6bd;line-height:1.6;}
+
+.main{margin-left:280px;padding:46px 56px 90px;max-width:1000px;}
+.tab{display:none;}
+.tab.show{display:block;animation:fade .25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.cover{background:linear-gradient(135deg,var(--navy) 0%,#26365f 100%);color:#fff;border-radius:18px;
+  padding:54px 48px;margin-bottom:36px;position:relative;overflow:hidden;}
+.cover::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+  border:2px solid rgba(200,168,75,.35);border-radius:50%;}
+.cover .eyebrow{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);font-size:14px;text-transform:uppercase;}
+.cover h1{font-size:32px;font-weight:900;margin:14px 0 6px;line-height:1.25;}
+.cover .sub{font-family:'EB Garamond',serif;font-style:italic;font-size:19px;color:#d9e0ef;}
+.cover .acad{margin-top:26px;font-size:15px;font-weight:700;color:var(--gold);}
+.cover .acad span{display:block;font-size:12px;font-weight:400;color:#aebbd4;margin-top:3px;letter-spacing:.5px;}
+
+.sec-h{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+.sec-h .badge{background:var(--gold);color:var(--navy);font-weight:900;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;}
+.sec-h h2{font-size:23px;font-weight:900;color:var(--navy);}
+.sec-h .en{font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);font-size:15px;margin-left:auto;}
+
+.subsec{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;
+  padding:6px 16px;border-radius:30px;margin:30px 0 14px;letter-spacing:.4px;}
+
+.enbox{background:#fff;border:1px solid #cccccc;border-left:5px solid #2E75B6;border-radius:8px;
+  padding:16px 20px;font-family:'EB Garamond',serif;font-size:17px;line-height:1.6;color:#1f2a44;margin:0 0 6px;}
+.full .enbox{margin-bottom:14px;}
+.snum{display:inline-block;background:var(--navy);color:var(--gold);font-family:'Noto Sans KR';font-size:13px;
+  font-weight:700;width:24px;height:24px;border-radius:50%;text-align:center;line-height:24px;margin-right:8px;
+  vertical-align:1px;}
+
+.scard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:22px;
+  box-shadow:0 2px 10px rgba(26,39,68,.05);}
+.slit{background:#f7f8fb;border-radius:8px;padding:12px 16px;font-size:14.5px;color:#34405c;margin:10px 0 4px;}
+.slit b{color:var(--navy);}
+.strans{font-size:15px;color:#2b3349;font-weight:500;padding:4px 2px 12px;}
+.gram{margin-top:8px;}
+.gline{font-size:14px;padding:5px 0;}
+.g-item{font-weight:700;color:#7F6000;background:#FFF2CC;padding:2px 8px;border-radius:5px;}
+.g-ex{color:#1f4e79;}
+.g-ex .en{font-family:'EB Garamond',serif;font-style:italic;}
+.g-pt{color:#375623;background:#E2EFDA;padding:2px 8px;border-radius:5px;}
+.gmark{font-weight:900;margin-right:5px;}
+.gmark.d{color:var(--gold);}
+.gmark.t{color:#2E75B6;}
+.gmark.s{color:#c0392b;}
+
+.voc{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:13px 18px;margin-bottom:9px;flex-wrap:wrap;}
+.voc .w{font-family:'EB Garamond',serif;font-weight:600;font-size:18px;color:var(--navy);min-width:150px;}
+.voc .pos{font-size:12px;font-weight:700;color:#fff;background:var(--gold);padding:2px 9px;border-radius:20px;}
+.voc .mean{font-size:15px;color:#2b3349;flex:1;min-width:160px;}
+.voc .deriv{font-size:13px;color:#375623;background:#E2EFDA;padding:3px 10px;border-radius:6px;}
+.exp-h{font-size:16px;font-weight:800;color:var(--navy);margin:26px 0 12px;border-bottom:2px solid var(--gold);
+  display:inline-block;padding-bottom:4px;}
+.phrase{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:8px;
+  padding:11px 16px;margin-bottom:8px;font-size:14.5px;}
+.phrase .en{font-family:'EB Garamond',serif;font-weight:600;color:var(--navy);}
+
+.trans-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 30px;
+  font-size:16px;line-height:2;color:#2b3349;}
+.trans-box .subsec{margin-top:22px;}
+.trans-box p{margin-bottom:14px;}
+
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px;}
+.tcard .lab{font-family:'EB Garamond',serif;font-style:italic;color:var(--gold);font-weight:600;font-size:15px;letter-spacing:1px;}
+.tcard .big{font-size:18px;font-weight:700;color:var(--navy);margin-top:6px;}
+.tcard .body{font-size:15.5px;color:#2b3349;margin-top:6px;}
+.flow{display:flex;flex-direction:column;gap:0;margin-top:10px;}
+.fstep{background:#f7f8fb;border-left:4px solid var(--navy);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:10px;}
+.fstep .ph{font-weight:800;color:var(--gold);font-size:13px;}
+.fstep .tx{font-size:15px;color:#2b3349;margin-top:2px;}
+
+.quiz{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:26px;
+  box-shadow:0 2px 10px rgba(26,39,68,.05);}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.qno{background:var(--navy);color:var(--gold);font-weight:800;font-size:14px;padding:5px 13px;border-radius:30px;}
+.qtype{font-size:13px;font-weight:700;color:var(--muted);}
+.qstem{font-size:15.5px;font-weight:600;color:#23304d;margin-bottom:8px;}
+.qpassage{background:#f7f8fb;border-radius:8px;padding:14px 18px;font-family:'EB Garamond',serif;font-size:15.5px;
+  line-height:1.7;color:#28324c;margin-bottom:14px;}
+.qpassage u{text-decoration-color:#c0392b;text-underline-offset:3px;}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #dde1ea;border-radius:10px;
+  padding:12px 16px;font-family:'Noto Sans KR',sans-serif;font-size:14.8px;color:#2b3349;cursor:pointer;
+  margin-bottom:8px;transition:.15s;}
+.opt:hover{border-color:var(--gold);background:#fffdf5;}
+.opt .en{font-family:'EB Garamond',serif;}
+.opt.correct{background:#e8f6ec;border-color:#2e8b57;color:#1c6b3a;font-weight:700;}
+.opt.wrong{background:#fdecec;border-color:#d9534f;color:#a4332f;font-weight:700;}
+.opt.locked{cursor:default;}
+.explain{display:none;background:#fff8e6;border-left:4px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:12px 16px;font-size:14px;color:#5a4a17;margin-top:6px;line-height:1.6;}
+.explain.show{display:block;}
+.qbtns{margin-top:8px;}
+.reset{background:transparent;border:1px solid #cdd5e4;color:var(--muted);font-family:'Noto Sans KR';
+  font-size:13px;padding:7px 15px;border-radius:8px;cursor:pointer;}
+.reset:hover{background:#f0f2f7;}
+
+.essay{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:26px;}
+.essay .cond{font-size:13.5px;color:#7F6000;background:#FFF2CC;border-radius:8px;padding:9px 14px;margin:8px 0 12px;}
+.essay textarea{width:100%;min-height:96px;border:1.5px solid #dde1ea;border-radius:10px;padding:13px 15px;
+  font-family:'Noto Sans KR',sans-serif;font-size:15px;line-height:1.7;color:#23304d;resize:vertical;}
+.essay textarea:focus{outline:none;border-color:var(--gold);}
+.ansbtn{margin-top:10px;background:var(--navy);color:#fff;border:none;font-family:'Noto Sans KR';font-size:14px;
+  font-weight:600;padding:9px 18px;border-radius:9px;cursor:pointer;}
+.ansbtn:hover{background:#26365f;}
+.model{display:none;background:#eef4ec;border-left:4px solid #375623;border-radius:0 8px 8px 0;
+  padding:14px 16px;margin-top:12px;font-size:14.5px;color:#2c4020;line-height:1.7;}
+.model.show{display:block;}
+.model .lab{font-weight:800;color:#375623;display:block;margin-bottom:5px;}
+.model .en{font-family:'EB Garamond',serif;font-style:italic;color:#1f4e79;}
+
+@media(max-width:880px){
+  .sidebar{position:static;width:100%;height:auto;}
+  .main{margin-left:0;padding:24px 18px 70px;}
+  .cover h1{font-size:25px;}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sb-brand">Educere</div>
+  <div class="sb-acad">에듀케레 영수학원</div>
+  <div class="sb-lesson">영독작 Lesson 4-1</div>
+  <div class="sb-rule"></div>
+  <nav class="sb-nav">
+    <button class="active" onclick="showTab('t1',this)"><span class="sb-num">1</span>전문</button>
+    <button onclick="showTab('t2',this)"><span class="sb-num">2</span>문장분석</button>
+    <button onclick="showTab('t3',this)"><span class="sb-num">3</span>핵심단어 및 표현</button>
+    <button onclick="showTab('t4',this)"><span class="sb-num">4</span>전문해석</button>
+    <button onclick="showTab('t5',this)"><span class="sb-num">5</span>주제와 요지</button>
+    <button onclick="showTab('t6',this)"><span class="sb-num">6</span>변형문제</button>
+  </nav>
+  <div class="sb-foot">
+    경남 양산시 물금읍<br>바른학습관<br>Tel. 055-363-8010
+  </div>
+</aside>
+
+<main class="main">
+
+  <div class="cover">
+    <div class="eyebrow">English Reading &amp; Writing</div>
+    <h1>Florence Nightingale:<br>Saving Lives with Statistics</h1>
+    <div class="sub">Lesson 4-1 &middot; The Power of Data Visualization</div>
+    <div class="acad">에듀케레 영수학원
+      <span>EDUCERE &middot; 영어 독해와 작문 심화 분석</span>
+    </div>
+  </div>
+
+  <section class="tab show full" id="t1">
+    <div class="sec-h"><div class="badge">1</div><h2>전문</h2><span class="en">Full Text</span></div>
+
+    <div class="subsec">Introduction &middot; 알려지지 않은 통계학자 나이팅게일</div>
+    <div class="enbox"><span class="snum">1</span>When you think of Florence Nightingale, you probably picture a lady with a lamp taking care of injured and ill soldiers. <span class="snum">2</span>Her compassion for these people was clearly seen through her acts. <span class="snum">3</span>On the other hand, her passion for statistics as a way to save people's lives is not well known to many people. <span class="snum">4</span>In October 1853, the conflict between Russia and an alliance of European countries turned into a war in the Turkish region known as Crimea. <span class="snum">5</span>The war lasted from October 1853 to March 1856 and resulted in large numbers of deaths and injuries. <span class="snum">6</span>Hoping to contribute her skills to help the British troops fighting in the Crimean War, Nightingale accepted a nursing position at an army base in Scutari, Turkey in 1854.</div>
+
+    <div class="subsec">The Problem &middot; 열악한 환경과 무질서한 기록</div>
+    <div class="enbox"><span class="snum">7</span>Upon her arrival at the base in Scutari, Nightingale realized how difficult it would be to provide proper medical care at the base. <span class="snum">8</span>Essential supplies such as food, basic furniture, and blankets were not sufficient, and sometimes nonexistent. <span class="snum">9</span>Patients had to deal with inadequate sanitation, which was worsened by exposure to rats and fleas. <span class="snum">10</span>Furthermore, the medical records were extremely disorganized. <span class="snum">11</span>That was because none of the hospitals were using the same reporting system as any of the others. <span class="snum">12</span>Each hospital had a different system of naming and classifying diseases, and even the number of deaths was not accurate. <span class="snum">13</span>Thus, Nightingale dedicated herself not only to serving the needs of the injured and ill soldiers directly but also to improving the record-keeping of the hospitals. <span class="snum">14</span>She introduced the practice of recording the cause of each death in a uniform manner, which had not been done previously.</div>
+
+    <div class="enbox"><span class="snum">15</span>After witnessing many tragic deaths during the war, Nightingale knew that the only way to prevent unnecessary deaths was to improve sanitary conditions in army hospitals. <span class="snum">16</span>Therefore, she decided to persuade army officials and politicians that widespread sanitation reform was necessary. <span class="snum">17</span>With the help of William Farr, a leading statistician at the time, Nightingale made a number of reports based on the information she had gathered during the war. <span class="snum">18</span>She knew that her message might easily get lost in a long list of tables. <span class="snum">19</span>So, in an attempt to communicate the information in a more effective way, she developed a unique graph: the polar area graph.</div>
+
+    <div class="subsec">The Graph &middot; 극지방 면적 그래프</div>
+    <div class="enbox"><span class="snum">20</span>The polar area graph presented a great deal of information about the causes of death of British soldiers in Crimea at a glance. <span class="snum">21</span>Each of the twelve sectors displayed on the graph represented a different month. <span class="snum">22</span>The size of the sector showed how many deaths occurred that month, with the largest sectors indicating the months with the highest death rates. <span class="snum">23</span>Within each sector, three colors were used to show the cause of death. <span class="snum">24</span>The blue section represented deaths attributed to infectious diseases like cholera. <span class="snum">25</span>The pink section showed deaths caused by wounds, most of which were received in combat. <span class="snum">26</span>Black stood for deaths caused by anything other than diseases or wounds.</div>
+
+    <div class="subsec">The Impact &middot; 위생 개혁과 그 결과</div>
+    <div class="enbox"><span class="snum">27</span>Nightingale analyzed this data and tried to figure out ways to lower the number of deaths. <span class="snum">28</span>For example, she made efforts to improve air flow in hospitals and develop safer ways to process sewage during the war. <span class="snum">29</span>Her efforts resulted in a sharp drop in deaths caused by contagious diseases. <span class="snum">30</span>This can be seen on the graph in the months where the blue section nearly disappears.</div>
+
+    <div class="enbox"><span class="snum">31</span>Through her graphs, Nightingale effectively demonstrated the substantial impact that contagious diseases had on the soldiers in the army hospital. <span class="snum">32</span>In fact, infectious disease would have wiped out the entire army if the trend had continued. <span class="snum">33</span>By showing her message in such a clear way, however, she was able to convince people that a large number of deaths could be prevented. <span class="snum">34</span>As a consequence, sanitation procedures used by hospitals underwent extensive reforms, and the number of preventable deaths decreased sharply. <span class="snum">35</span>Thanks to her effective tools of communication, she made a crucial and lasting impact in the fields of both medicine and statistics.</div>
+  </section>
+
+  <section class="tab" id="t2">
+    <div class="sec-h"><div class="badge">2</div><h2>문장분석</h2><span class="en">Sentence Analysis &middot; 35 sentences</span></div>
+
+    <div class="subsec">Introduction</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">1</span>When you think of Florence Nightingale, you probably picture a lady with a lamp taking care of injured and ill soldiers.</div>
+      <div class="slit">When you <b>think of</b> Florence Nightingale, / you probably picture a lady with a lamp / <b>taking care of</b> injured and ill soldiers.<br>당신이 플로렌스 나이팅게일을 떠올릴 때, / 당신은 아마 등불을 든 여인을 그릴 것이다 / 부상당하고 아픈 병사들을 돌보는.</div>
+      <div class="strans">플로렌스 나이팅게일을 떠올리면, 당신은 아마 등불을 들고 부상병과 환자를 돌보는 여인을 그릴 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">think of (~을 떠올리다/생각하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">think of Florence Nightingale</span> <span class="gmark s">&#9733;</span><span class="g-pt">think of A as B(A를 B로 여기다)와 구별</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">현재분사 후치수식</span> <span class="gmark t">&#9654;</span><span class="g-ex">a lady ... taking care of soldiers</span> <span class="gmark s">&#9733;</span><span class="g-pt">taking이 a lady를 능동으로 수식, '~하고 있는'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">2</span>Her compassion for these people was clearly seen through her acts.</div>
+      <div class="slit">Her compassion <b>for</b> these people / <b>was clearly seen</b> / through her acts.<br>이 사람들에 대한 그녀의 연민은 / 분명히 보여졌다 / 그녀의 행동을 통해.</div>
+      <div class="strans">이들에 대한 그녀의 연민은 그녀의 행동을 통해 분명히 드러났다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">수동태 (be + 부사 + p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">was clearly seen</span> <span class="gmark s">&#9733;</span><span class="g-pt">부사 clearly가 be동사와 과거분사 사이에 위치</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">전치사 for (대상)</span> <span class="gmark t">&#9654;</span><span class="g-ex">compassion for these people</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~에 대한 연민', compassion + for</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">3</span>On the other hand, her passion for statistics as a way to save people's lives is not well known to many people.</div>
+      <div class="slit"><b>On the other hand</b>, / her passion for statistics / as a way <b>to save</b> people's lives / is not well known to many people.<br>반면에, / 통계에 대한 그녀의 열정은 / 사람들의 생명을 구하는 방법으로서의 / 많은 사람들에게 잘 알려져 있지 않다.</div>
+      <div class="strans">반면, 사람들의 생명을 구하는 방법으로서 통계에 대한 그녀의 열정은 많은 이들에게 잘 알려져 있지 않다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">On the other hand (대조 연결어)</span> <span class="gmark t">&#9654;</span><span class="g-ex">On the other hand, her passion ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">앞의 '연민'과 '통계 열정'을 대조</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">to부정사 형용사적 용법</span> <span class="gmark t">&#9654;</span><span class="g-ex">a way to save people's lives</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~하는 방법', way를 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">4</span>In October 1853, the conflict between Russia and an alliance of European countries turned into a war in the Turkish region known as Crimea.</div>
+      <div class="slit">In October 1853, / the conflict between Russia and an alliance of European countries / <b>turned into</b> a war / in the Turkish region <b>known as</b> Crimea.<br>1853년 10월에, / 러시아와 유럽 국가 동맹 사이의 갈등은 / 전쟁으로 바뀌었다 / 크림이라고 알려진 터키 지역에서.</div>
+      <div class="strans">1853년 10월, 러시아와 유럽 국가 동맹 사이의 갈등은 크림이라 불리는 터키 지역에서 전쟁으로 번졌다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">turn into (~으로 바뀌다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">turned into a war</span> <span class="gmark s">&#9733;</span><span class="g-pt">자동사 turn + into, '~로 변하다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (known as)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the region known as Crimea</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~로 알려진', region 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">5</span>The war lasted from October 1853 to March 1856 and resulted in large numbers of deaths and injuries.</div>
+      <div class="slit">The war <b>lasted</b> from October 1853 to March 1856 / and <b>resulted in</b> large numbers of deaths and injuries.<br>그 전쟁은 1853년 10월부터 1856년 3월까지 지속되었다 / 그리고 많은 사망자와 부상자를 낳았다.</div>
+      <div class="strans">그 전쟁은 1853년 10월부터 1856년 3월까지 이어졌고, 수많은 사망자와 부상자를 낳았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">자동사 last (지속되다) + from A to B</span> <span class="gmark t">&#9654;</span><span class="g-ex">lasted from October 1853 to March 1856</span> <span class="gmark s">&#9733;</span><span class="g-pt">last가 '지속되다'의 자동사</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">result in (~을 초래하다/낳다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">resulted in large numbers of deaths</span> <span class="gmark s">&#9733;</span><span class="g-pt">result in(결과를 낳다) vs result from(~에서 비롯되다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">6</span>Hoping to contribute her skills to help the British troops fighting in the Crimean War, Nightingale accepted a nursing position at an army base in Scutari, Turkey in 1854.</div>
+      <div class="slit"><b>Hoping to contribute</b> her skills / to help the British troops / <b>fighting</b> in the Crimean War, / Nightingale accepted a nursing position / at an army base in Scutari, Turkey in 1854.<br>자신의 기술을 기여하기를 바라며 / 영국군을 돕기 위해 / 크림 전쟁에서 싸우는, / 나이팅게일은 간호직을 받아들였다 / 1854년 터키 스쿠타리의 군 기지에서.</div>
+      <div class="strans">크림 전쟁에서 싸우는 영국군을 돕기 위해 자신의 능력을 기여하고자, 나이팅게일은 1854년 터키 스쿠타리의 군 기지에서 간호직을 맡았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">분사구문 (현재분사 Hoping)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Hoping to contribute ..., Nightingale accepted</span> <span class="gmark s">&#9733;</span><span class="g-pt">주절 주어(Nightingale)와 능동, '~하기를 바라며'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">현재분사 후치수식 (fighting)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the British troops fighting in the war</span> <span class="gmark s">&#9733;</span><span class="g-pt">troops를 능동으로 수식, '싸우고 있는'</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">The Problem</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">7</span>Upon her arrival at the base in Scutari, Nightingale realized how difficult it would be to provide proper medical care at the base.</div>
+      <div class="slit"><b>Upon her arrival</b> at the base in Scutari, / Nightingale realized / <b>how difficult it would be</b> / <b>to provide</b> proper medical care at the base.<br>스쿠타리 기지에 도착하자마자, / 나이팅게일은 깨달았다 / 얼마나 어려울지를 / 그 기지에서 적절한 의료를 제공하는 것이.</div>
+      <div class="strans">스쿠타리 기지에 도착하자마자, 나이팅게일은 그곳에서 제대로 된 의료를 제공하는 것이 얼마나 어려울지 깨달았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">upon[on] + 명사/-ing (~하자마자)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Upon her arrival</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~하자마자', upon + 명사(arrival)/동명사</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">간접의문문 + 가주어 it / 진주어 to부정사</span> <span class="gmark t">&#9654;</span><span class="g-ex">how difficult it would be to provide ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">realized의 목적어(간접의문문), it 가주어 &middot; to provide 진주어</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">8</span>Essential supplies such as food, basic furniture, and blankets were not sufficient, and sometimes nonexistent.</div>
+      <div class="slit">Essential supplies <b>such as</b> food, basic furniture, and blankets / <b>were</b> not sufficient, / and sometimes nonexistent.<br>음식, 기본 가구, 담요 같은 필수 물품들은 / 충분하지 않았다, / 그리고 때로는 아예 없었다.</div>
+      <div class="strans">음식, 기본 가구, 담요 같은 필수 물품은 충분하지 않았고, 때로는 아예 존재하지도 않았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">such as (예시, ~와 같은)</span> <span class="gmark t">&#9654;</span><span class="g-ex">supplies such as food, ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~같은', 구체적 예를 나열</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">긴 주어의 수일치 (복수 supplies)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Essential supplies ... were not sufficient</span> <span class="gmark s">&#9733;</span><span class="g-pt">중간 수식어에 현혹 말고 핵 supplies(복수)에 were 일치</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">9</span>Patients had to deal with inadequate sanitation, which was worsened by exposure to rats and fleas.</div>
+      <div class="slit">Patients <b>had to deal with</b> inadequate sanitation, / <b>which</b> was worsened / by exposure to rats and fleas.<br>환자들은 부적절한 위생 상태를 감당해야 했다, / 그리고 그것은 악화되었다 / 쥐와 벼룩에의 노출로 인해.</div>
+      <div class="strans">환자들은 열악한 위생 상태를 감당해야 했고, 그 상태는 쥐와 벼룩에 노출되면서 더욱 나빠졌다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">have to + 동사원형 (의무) / deal with</span> <span class="gmark t">&#9654;</span><span class="g-ex">had to deal with inadequate sanitation</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~해야 했다', deal with(~을 처리·감당하다)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">계속적 용법 which + 수동태</span> <span class="gmark t">&#9654;</span><span class="g-ex">sanitation, which was worsened by ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">콤마+which(앞 명사 보충), by(원인/행위자)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">10</span>Furthermore, the medical records were extremely disorganized.</div>
+      <div class="slit"><b>Furthermore</b>, / the medical records were <b>extremely disorganized</b>.<br>게다가, / 의료 기록들은 극도로 무질서했다.</div>
+      <div class="strans">게다가 의료 기록은 극도로 엉망이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">연결부사 furthermore (게다가)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Furthermore, the medical records ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">앞 내용에 정보를 첨가/부연</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">부사 + 형용사 (강조)</span> <span class="gmark t">&#9654;</span><span class="g-ex">extremely disorganized</span> <span class="gmark s">&#9733;</span><span class="g-pt">부사 extremely가 형용사 disorganized를 강조</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">11</span>That was because none of the hospitals were using the same reporting system as any of the others.</div>
+      <div class="slit">That was <b>because</b> <b>none of</b> the hospitals were using / <b>the same</b> reporting system <b>as</b> any of the others.<br>그것은 ~이었다 / 어떤 병원도 사용하지 않았기 때문에 / 다른 어떤 병원과 똑같은 보고 체계를.</div>
+      <div class="strans">그것은 어떤 병원도 다른 병원과 동일한 보고 체계를 쓰지 않았기 때문이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">That is because ~ (그것은 ~때문이다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">That was because none of ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">because + 절(이유). That is why(그래서 ~다)와 구별</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">none of + 복수명사 / the same A as B</span> <span class="gmark t">&#9654;</span><span class="g-ex">none of the hospitals ... the same system as any of the others</span> <span class="gmark s">&#9733;</span><span class="g-pt">none of(아무도 ~않다), the same A as B(B와 같은 A)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">12</span>Each hospital had a different system of naming and classifying diseases, and even the number of deaths was not accurate.</div>
+      <div class="slit"><b>Each hospital had</b> a different system / of naming and classifying diseases, / and even <b>the number of</b> deaths <b>was</b> not accurate.<br>각 병원은 서로 다른 체계를 가지고 있었다 / 질병을 명명하고 분류하는, / 그리고 사망자 수조차도 / 정확하지 않았다.</div>
+      <div class="strans">각 병원은 질병을 명명하고 분류하는 방식이 서로 달랐고, 심지어 사망자 수마저 정확하지 않았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">each + 단수명사 + 단수동사</span> <span class="gmark t">&#9654;</span><span class="g-ex">Each hospital had ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">each는 단수 취급(had)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the number of + 복수명사 + 단수동사</span> <span class="gmark t">&#9654;</span><span class="g-ex">the number of deaths was not accurate</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 수'는 단수(was), a number of(많은 + 복수동사)와 구별</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">13</span>Thus, Nightingale dedicated herself not only to serving the needs of the injured and ill soldiers directly but also to improving the record-keeping of the hospitals.</div>
+      <div class="slit">Thus, Nightingale <b>dedicated herself</b> / <b>not only to serving</b> the needs of the injured and ill soldiers directly / <b>but also to improving</b> the record-keeping of the hospitals.<br>그래서, 나이팅게일은 자신을 바쳤다 / 부상병과 환자들의 필요를 직접 돌보는 데뿐만 아니라 / 병원의 기록 관리를 개선하는 데에도.</div>
+      <div class="strans">그래서 나이팅게일은 부상병과 환자들의 필요를 직접 돌보는 일뿐 아니라 병원의 기록 관리를 개선하는 일에도 헌신했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">dedicate oneself to -ing (~에 헌신하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">dedicated herself to serving ... to improving</span> <span class="gmark s">&#9733;</span><span class="g-pt">to는 전치사 &rarr; 동명사(serving, improving). devote oneself to와 동일</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">not only A but also B (병렬)</span> <span class="gmark t">&#9654;</span><span class="g-ex">not only to serving ... but also to improving</span> <span class="gmark s">&#9733;</span><span class="g-pt">'A뿐 아니라 B도', to+동명사 형태로 대등하게 연결</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">14</span>She introduced the practice of recording the cause of each death in a uniform manner, which had not been done previously.</div>
+      <div class="slit">She introduced <b>the practice of recording</b> the cause of each death / in a uniform manner, / <b>which had not been done</b> previously.<br>그녀는 관행을 도입했다 / 각 사망의 원인을 기록하는 / 통일된 방식으로, / 그리고 그것은 이전에는 행해지지 않았다.</div>
+      <div class="strans">그녀는 각 사망 원인을 통일된 방식으로 기록하는 관행을 도입했는데, 이는 이전에는 없던 일이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">of + 동명사 (동격/내용 부연)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the practice of recording ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">practice의 구체적 내용을 of -ing로 설명</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">계속적 용법 which + 과거완료 수동</span> <span class="gmark t">&#9654;</span><span class="g-ex">which had not been done previously</span> <span class="gmark s">&#9733;</span><span class="g-pt">앞 절을 받는 which, had been p.p.(대과거 수동)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">15</span>After witnessing many tragic deaths during the war, Nightingale knew that the only way to prevent unnecessary deaths was to improve sanitary conditions in army hospitals.</div>
+      <div class="slit"><b>After witnessing</b> many tragic deaths during the war, / Nightingale knew that / <b>the only way to prevent</b> unnecessary deaths / <b>was to improve</b> sanitary conditions in army hospitals.<br>전쟁 중 많은 비극적인 죽음을 목격한 후, / 나이팅게일은 알았다 / 불필요한 죽음을 막는 유일한 방법은 / 군 병원의 위생 상태를 개선하는 것임을.</div>
+      <div class="strans">전쟁 중 수많은 비극적 죽음을 목격한 후, 나이팅게일은 불필요한 죽음을 막는 유일한 길이 군 병원의 위생 상태를 개선하는 것임을 알았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">after + 동명사 (~한 후에)</span> <span class="gmark t">&#9654;</span><span class="g-ex">After witnessing many ... deaths</span> <span class="gmark s">&#9733;</span><span class="g-pt">전치사 after + 동명사(witnessing)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">the way to + V (주어) / to부정사 보어</span> <span class="gmark t">&#9654;</span><span class="g-ex">the only way to prevent ... was to improve</span> <span class="gmark s">&#9733;</span><span class="g-pt">to prevent(way 수식), 주격보어 to improve</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">16</span>Therefore, she decided to persuade army officials and politicians that widespread sanitation reform was necessary.</div>
+      <div class="slit">Therefore, she <b>decided to persuade</b> army officials and politicians / <b>that</b> widespread sanitation reform was necessary.<br>그러므로, 그녀는 군 관계자와 정치인들을 설득하기로 결심했다 / 광범위한 위생 개혁이 필요하다고.</div>
+      <div class="strans">그래서 그녀는 광범위한 위생 개혁이 필요하다고 군 관계자와 정치인들을 설득하기로 결심했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">decide to + 동사원형</span> <span class="gmark t">&#9654;</span><span class="g-ex">decided to persuade</span> <span class="gmark s">&#9733;</span><span class="g-pt">decide는 to부정사를 목적어로 취함</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">persuade + 목적어 + that절</span> <span class="gmark t">&#9654;</span><span class="g-ex">persuade ... that ... was necessary</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~에게 …라고 설득하다', that절로 내용 전달</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">17</span>With the help of William Farr, a leading statistician at the time, Nightingale made a number of reports based on the information she had gathered during the war.</div>
+      <div class="slit">With the help of William Farr, / a leading statistician at the time, / Nightingale made <b>a number of</b> reports / <b>based on</b> the information / (which) she <b>had gathered</b> during the war.<br>윌리엄 파의 도움으로, / 당시 선도적인 통계학자였던, / 나이팅게일은 다수의 보고서를 만들었다 / 정보에 근거하여 / 그녀가 전쟁 중 수집했던.</div>
+      <div class="strans">당시 선도적인 통계학자였던 윌리엄 파의 도움으로, 나이팅게일은 전쟁 중 수집한 정보를 바탕으로 여러 보고서를 작성했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">동격 콤마 (명사, 명사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">William Farr, a leading statistician at the time</span> <span class="gmark s">&#9733;</span><span class="g-pt">콤마로 묶인 두 표현은 같은 사람(동격)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">based on + 목적격 관계대명사 생략 + 대과거</span> <span class="gmark t">&#9654;</span><span class="g-ex">based on the information (which) she had gathered</span> <span class="gmark s">&#9733;</span><span class="g-pt">based on(~에 근거하여), had gathered(보고서 작성보다 이전 시제)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">18</span>She knew that her message might easily get lost in a long list of tables.</div>
+      <div class="slit">She knew <b>that</b> her message might easily <b>get lost</b> / in a long list of tables.<br>그녀는 알았다 / 자신의 메시지가 쉽게 묻혀 버릴 수 있다는 것을 / 긴 표 목록 속에서.</div>
+      <div class="strans">그녀는 자신의 메시지가 긴 표 목록 속에 묻혀 버리기 쉽다는 것을 알았다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">get + 과거분사 (get lost, ~되다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">might easily get lost</span> <span class="gmark s">&#9733;</span><span class="g-pt">get + p.p.로 수동·상태 변화, '묻히다/사라지다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">명사절 접속사 that (knew의 목적어)</span> <span class="gmark t">&#9654;</span><span class="g-ex">knew that her message might ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">that절 전체가 knew의 목적어</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">19</span>So, in an attempt to communicate the information in a more effective way, she developed a unique graph: the polar area graph.</div>
+      <div class="slit">So, <b>in an attempt to communicate</b> the information / in a more effective way, / she developed a unique graph: / the polar area graph.<br>그래서, 정보를 전달하려는 시도로 / 더 효과적인 방식으로, / 그녀는 독특한 그래프를 개발했다: / 극지방 면적 그래프를.</div>
+      <div class="strans">그래서 더 효과적인 방식으로 정보를 전달하려는 시도로, 그녀는 극지방 면적 그래프라는 독특한 그래프를 개발했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">in an attempt to + V (~하려는 시도로)</span> <span class="gmark t">&#9654;</span><span class="g-ex">in an attempt to communicate</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~하기 위한 시도로', 목적을 나타냄</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">콜론(:) 동격/부연</span> <span class="gmark t">&#9654;</span><span class="g-ex">a unique graph: the polar area graph</span> <span class="gmark s">&#9733;</span><span class="g-pt">콜론 뒤에서 graph를 구체적으로 명시</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">The Graph</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">20</span>The polar area graph presented a great deal of information about the causes of death of British soldiers in Crimea at a glance.</div>
+      <div class="slit">The polar area graph presented <b>a great deal of</b> information / about the causes of death of British soldiers in Crimea / <b>at a glance</b>.<br>극지방 면적 그래프는 많은 정보를 제시했다 / 크림에서 영국 병사들의 사망 원인에 대한 / 한눈에.</div>
+      <div class="strans">극지방 면적 그래프는 크림에서 영국 병사들의 사망 원인에 관한 많은 정보를 한눈에 보여 주었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">a great deal of + 불가산명사</span> <span class="gmark t">&#9654;</span><span class="g-ex">a great deal of information</span> <span class="gmark s">&#9733;</span><span class="g-pt">'많은', 셀 수 없는 명사를 수식</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">at a glance (한눈에)</span> <span class="gmark t">&#9654;</span><span class="g-ex">presented ... at a glance</span> <span class="gmark s">&#9733;</span><span class="g-pt">관용 부사구, '한눈에/즉시'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">21</span>Each of the twelve sectors displayed on the graph represented a different month.</div>
+      <div class="slit"><b>Each of</b> the twelve sectors <b>displayed</b> on the graph / represented a different month.<br>그래프에 표시된 12개의 부채꼴 각각은 / 서로 다른 달을 나타냈다.</div>
+      <div class="strans">그래프에 표시된 12개의 부채꼴은 저마다 다른 달을 나타냈다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">Each of + 복수명사 + 단수동사</span> <span class="gmark t">&#9654;</span><span class="g-ex">Each of the twelve sectors ... represented</span> <span class="gmark s">&#9733;</span><span class="g-pt">each는 단수 취급(represented, 동사 수일치 주의)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (displayed)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the twelve sectors displayed on the graph</span> <span class="gmark s">&#9733;</span><span class="g-pt">'표시된', sectors를 수동으로 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">22</span>The size of the sector showed how many deaths occurred that month, with the largest sectors indicating the months with the highest death rates.</div>
+      <div class="slit">The size of the sector showed / <b>how many deaths occurred</b> that month, / <b>with</b> the largest sectors <b>indicating</b> / the months with the highest death rates.<br>부채꼴의 크기는 보여 주었다 / 그달에 얼마나 많은 사망이 일어났는지를, / 가장 큰 부채꼴이 나타내면서 / 사망률이 가장 높은 달을.</div>
+      <div class="strans">부채꼴의 크기는 그달에 얼마나 많은 사망이 발생했는지를 보여 주었는데, 가장 큰 부채꼴은 사망률이 가장 높은 달을 가리켰다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">간접의문문 (how many + 명사 + 동사)</span> <span class="gmark t">&#9654;</span><span class="g-ex">how many deaths occurred</span> <span class="gmark s">&#9733;</span><span class="g-pt">showed의 목적어, 평서문 어순(의문사+S+V)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">with + 목적어 + 현재분사 (부대상황)</span> <span class="gmark t">&#9654;</span><span class="g-ex">with the largest sectors indicating ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">'O가 ~하면서', 능동이므로 현재분사 indicating</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">23</span>Within each sector, three colors were used to show the cause of death.</div>
+      <div class="slit"><b>Within</b> each sector, / three colors <b>were used to show</b> / the cause of death.<br>각 부채꼴 안에서, / 세 가지 색이 사용되었다 / 사망 원인을 보여 주기 위해.</div>
+      <div class="strans">각 부채꼴 안에서는 사망 원인을 나타내기 위해 세 가지 색이 사용되었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">수동태(were used) + 목적의 to부정사</span> <span class="gmark t">&#9654;</span><span class="g-ex">three colors were used to show</span> <span class="gmark s">&#9733;</span><span class="g-pt">be used(사용되다)+to부정사. be used to -ing(익숙하다)와 구별</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">전치사 within (~안에서)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Within each sector</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 내부에서', 범위를 표시</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">24</span>The blue section represented deaths attributed to infectious diseases like cholera.</div>
+      <div class="slit">The blue section represented deaths / <b>attributed to</b> infectious diseases / <b>like</b> cholera.<br>파란색 부분은 사망을 나타냈다 / 전염병 탓으로 돌려지는 / 콜레라 같은.</div>
+      <div class="strans">파란색 부분은 콜레라 같은 전염병으로 인한 사망을 나타냈다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (attributed to)</span> <span class="gmark t">&#9654;</span><span class="g-ex">deaths attributed to infectious diseases</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~의 탓으로 여겨지는', attribute A to B의 수동</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">전치사 like (예시, ~같은)</span> <span class="gmark t">&#9654;</span><span class="g-ex">diseases like cholera</span> <span class="gmark s">&#9733;</span><span class="g-pt">like = such as, 예를 들 때</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">25</span>The pink section showed deaths caused by wounds, most of which were received in combat.</div>
+      <div class="slit">The pink section showed deaths / <b>caused by</b> wounds, / <b>most of which</b> were received in combat.<br>분홍색 부분은 사망을 보여 주었다 / 부상으로 인한, / 그것들 대부분은 전투에서 입은.</div>
+      <div class="strans">분홍색 부분은 부상으로 인한 사망을 보여 주었는데, 그 대부분은 전투에서 입은 것이었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (caused by)</span> <span class="gmark t">&#9654;</span><span class="g-ex">deaths caused by wounds</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~로 인한', cause의 수동 분사</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">수량사 + of which (계속적 용법)</span> <span class="gmark t">&#9654;</span><span class="g-ex">wounds, most of which were received</span> <span class="gmark s">&#9733;</span><span class="g-pt">'most of which'(그중 대부분), 앞 명사 wounds 보충</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">26</span>Black stood for deaths caused by anything other than diseases or wounds.</div>
+      <div class="slit">Black <b>stood for</b> deaths / caused by anything / <b>other than</b> diseases or wounds.<br>검은색은 사망을 의미했다 / 어떤 것에 의한 / 질병이나 부상 이외의.</div>
+      <div class="strans">검은색은 질병이나 부상 이외의 다른 원인으로 인한 사망을 의미했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">stand for (~을 의미하다/상징하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Black stood for deaths</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 나타내다/상징하다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">other than (~이외의)</span> <span class="gmark t">&#9654;</span><span class="g-ex">anything other than diseases or wounds</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~을 제외한', except for</span></div>
+      </div>
+    </div>
+
+    <div class="subsec">The Impact</div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">27</span>Nightingale analyzed this data and tried to figure out ways to lower the number of deaths.</div>
+      <div class="slit">Nightingale analyzed this data / and <b>tried to figure out</b> ways / <b>to lower</b> the number of deaths.<br>나이팅게일은 이 자료를 분석했다 / 그리고 방법을 알아내려고 노력했다 / 사망자 수를 줄일.</div>
+      <div class="strans">나이팅게일은 이 자료를 분석하고, 사망자 수를 줄일 방법을 알아내려 애썼다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">try to + 동사원형 (~하려고 애쓰다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">tried to figure out</span> <span class="gmark s">&#9733;</span><span class="g-pt">try to(노력하다) vs try -ing(시험 삼아 해보다)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">to부정사 형용사적 용법</span> <span class="gmark t">&#9654;</span><span class="g-ex">ways to lower the number of deaths</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~할 방법', ways를 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">28</span>For example, she made efforts to improve air flow in hospitals and develop safer ways to process sewage during the war.</div>
+      <div class="slit">For example, she <b>made efforts to improve</b> air flow in hospitals / and (to) <b>develop</b> safer ways / to process sewage during the war.<br>예를 들어, 그녀는 병원의 공기 흐름을 개선하려고 노력했다 / 그리고 더 안전한 방법을 개발하려고 / 전쟁 중 하수를 처리하는.</div>
+      <div class="strans">예를 들어, 그녀는 전쟁 중 병원의 환기를 개선하고 하수를 처리하는 더 안전한 방법을 개발하려고 노력했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">make efforts to + V (~하려고 노력하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">made efforts to improve ... and develop</span> <span class="gmark s">&#9733;</span><span class="g-pt">to improve와 (to) develop가 병렬</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">to부정사 병렬 (두 번째 to 생략)</span> <span class="gmark t">&#9654;</span><span class="g-ex">to improve ... and develop safer ways</span> <span class="gmark s">&#9733;</span><span class="g-pt">병렬 시 두 번째 to 생략 가능, 동사원형 develop</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">29</span>Her efforts resulted in a sharp drop in deaths caused by contagious diseases.</div>
+      <div class="slit">Her efforts <b>resulted in</b> a sharp drop / in deaths / <b>caused by</b> contagious diseases.<br>그녀의 노력은 급격한 감소로 이어졌다 / 사망의 / 전염병으로 인한.</div>
+      <div class="strans">그녀의 노력은 전염병으로 인한 사망의 급격한 감소로 이어졌다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">result in (~을 초래하다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">resulted in a sharp drop</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~라는 결과를 낳다', result from(~에서 비롯되다)과 구별</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (caused by)</span> <span class="gmark t">&#9654;</span><span class="g-ex">deaths caused by contagious diseases</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~로 인한', deaths를 수동으로 수식</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">30</span>This can be seen on the graph in the months where the blue section nearly disappears.</div>
+      <div class="slit">This <b>can be seen</b> on the graph / in the months / <b>where</b> the blue section nearly disappears.<br>이것은 그래프에서 볼 수 있다 / 그 달들에서 / 파란색 부분이 거의 사라지는.</div>
+      <div class="strans">이는 파란색 부분이 거의 사라지는 달들에서 그래프상으로 확인할 수 있다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">조동사 수동태 (can be p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">This can be seen</span> <span class="gmark s">&#9733;</span><span class="g-pt">can + be + 과거분사</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">관계부사 where (+ 완전한 절)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the months where the blue section ... disappears</span> <span class="gmark s">&#9733;</span><span class="g-pt">선행사(the months) + where + 완전한 절</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">31</span>Through her graphs, Nightingale effectively demonstrated the substantial impact that contagious diseases had on the soldiers in the army hospital.</div>
+      <div class="slit">Through her graphs, / Nightingale effectively demonstrated / the substantial impact / <b>that</b> contagious diseases <b>had on</b> the soldiers / in the army hospital.<br>그녀의 그래프를 통해, / 나이팅게일은 효과적으로 입증했다 / 상당한 영향을 / 전염병이 병사들에게 미친 / 군 병원의.</div>
+      <div class="strans">그녀는 자신의 그래프를 통해, 전염병이 군 병원의 병사들에게 미친 막대한 영향을 효과적으로 입증했다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">목적격 관계대명사 that</span> <span class="gmark t">&#9654;</span><span class="g-ex">the impact that contagious diseases had</span> <span class="gmark s">&#9733;</span><span class="g-pt">had의 목적어 역할, the impact를 수식</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">have an impact on (~에 영향을 미치다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">the impact that ... had on the soldiers</span> <span class="gmark s">&#9733;</span><span class="g-pt">관계사절 안에서 impact와 on이 분리됨</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">32</span>In fact, infectious disease would have wiped out the entire army if the trend had continued.</div>
+      <div class="slit">In fact, infectious disease <b>would have wiped out</b> the entire army / <b>if</b> the trend <b>had continued</b>.<br>사실, 전염병은 전체 군대를 전멸시켰을 것이다 / 만약 그 추세가 계속되었더라면.</div>
+      <div class="strans">사실, 만약 그 추세가 계속되었더라면 전염병은 군 전체를 전멸시켰을 것이다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">가정법 과거완료 (would have p.p. / if + had p.p.)</span> <span class="gmark t">&#9654;</span><span class="g-ex">would have wiped out ... if the trend had continued</span> <span class="gmark s">&#9733;</span><span class="g-pt">과거 사실의 반대, '~했더라면 …했을 것이다'</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">wipe out (전멸시키다)</span> <span class="gmark t">&#9654;</span><span class="g-ex">wiped out the entire army</span> <span class="gmark s">&#9733;</span><span class="g-pt">'쓸어버리다, 완전히 없애다'</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">33</span>By showing her message in such a clear way, however, she was able to convince people that a large number of deaths could be prevented.</div>
+      <div class="slit"><b>By showing</b> her message <b>in such a clear way</b>, however, / she was able to <b>convince people that</b> / a large number of deaths could be prevented.<br>그러나 자신의 메시지를 그토록 명확한 방식으로 보여 줌으로써, / 그녀는 사람들을 설득할 수 있었다 / 많은 수의 사망이 예방될 수 있다고.</div>
+      <div class="strans">그러나 메시지를 그토록 명확하게 보여 줌으로써, 그녀는 수많은 사망이 예방될 수 있다고 사람들을 설득할 수 있었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">by + 동명사 / such a + 형용사 + 명사</span> <span class="gmark t">&#9654;</span><span class="g-ex">By showing ... in such a clear way</span> <span class="gmark s">&#9733;</span><span class="g-pt">by -ing(~함으로써), such a(n)+형용사+명사 어순(so와 어순 구별)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">convince + 목적어 + that절 (+ 수동태)</span> <span class="gmark t">&#9654;</span><span class="g-ex">convince people that ... could be prevented</span> <span class="gmark s">&#9733;</span><span class="g-pt">'~에게 …라고 확신시키다', that절 안 조동사 수동(could be p.p.)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">34</span>As a consequence, sanitation procedures used by hospitals underwent extensive reforms, and the number of preventable deaths decreased sharply.</div>
+      <div class="slit"><b>As a consequence</b>, / sanitation procedures <b>used by</b> hospitals / <b>underwent</b> extensive reforms, / and <b>the number of</b> preventable deaths decreased sharply.<br>그 결과, / 병원에서 사용되는 위생 절차들은 / 광범위한 개혁을 겪었다, / 그리고 예방 가능한 사망자 수는 급격히 감소했다.</div>
+      <div class="strans">그 결과, 병원에서 쓰이던 위생 절차는 대대적인 개혁을 거쳤고, 예방 가능한 사망자 수는 급격히 줄었다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">As a consequence (그 결과)</span> <span class="gmark t">&#9654;</span><span class="g-ex">As a consequence, ...</span> <span class="gmark s">&#9733;</span><span class="g-pt">결과를 나타내는 연결어구(= as a result)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">과거분사 후치수식 (used by) + undergo</span> <span class="gmark t">&#9654;</span><span class="g-ex">procedures used by hospitals underwent</span> <span class="gmark s">&#9733;</span><span class="g-pt">used by(수동, procedures 수식), undergo-underwent(겪다)</span></div>
+      </div>
+    </div>
+
+    <div class="scard">
+      <div class="enbox"><span class="snum">35</span>Thanks to her effective tools of communication, she made a crucial and lasting impact in the fields of both medicine and statistics.</div>
+      <div class="slit"><b>Thanks to</b> her effective tools of communication, / she made a crucial and lasting impact / in the fields of <b>both</b> medicine <b>and</b> statistics.<br>그녀의 효과적인 의사소통 도구 덕분에, / 그녀는 결정적이고 지속적인 영향을 미쳤다 / 의학과 통계학 양쪽 분야에서.</div>
+      <div class="strans">효과적인 의사소통 도구 덕분에, 그녀는 의학과 통계학 양쪽 분야에 결정적이고 지속적인 영향을 남겼다.</div>
+      <div class="gram">
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">thanks to (~덕분에)</span> <span class="gmark t">&#9654;</span><span class="g-ex">Thanks to her effective tools</span> <span class="gmark s">&#9733;</span><span class="g-pt">긍정적 원인의 '~덕분에', + 명사(구)</span></div>
+        <div class="gline"><span class="gmark d">&#9670;</span><span class="g-item">both A and B</span> <span class="gmark t">&#9654;</span><span class="g-ex">both medicine and statistics</span> <span class="gmark s">&#9733;</span><span class="g-pt">'A와 B 둘 다', 상관접속사</span></div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="tab" id="t3">
+    <div class="sec-h"><div class="badge">3</div><h2>핵심단어 및 표현</h2><span class="en">Key Words &amp; Expressions</span></div>
+
+    <div class="exp-h">핵심 단어</div>
+
+    <div class="voc"><span class="w">compassion</span><span class="pos">n.</span><span class="mean">연민, 동정심</span><span class="deriv">compassionate (adj. 인정 많은)</span></div>
+    <div class="voc"><span class="w">passion</span><span class="pos">n.</span><span class="mean">열정</span><span class="deriv">passionate (adj. 열정적인)</span></div>
+    <div class="voc"><span class="w">statistics</span><span class="pos">n.</span><span class="mean">통계(학)</span><span class="deriv">statistical (adj.), statistician (n. 통계학자)</span></div>
+    <div class="voc"><span class="w">conflict</span><span class="pos">n.</span><span class="mean">갈등, 분쟁</span><span class="deriv">conflicting (adj. 상충하는)</span></div>
+    <div class="voc"><span class="w">alliance</span><span class="pos">n.</span><span class="mean">동맹, 연합</span><span class="deriv">ally (n. 동맹국 / v. 동맹을 맺다)</span></div>
+    <div class="voc"><span class="w">troops</span><span class="pos">n.</span><span class="mean">군대, 병력</span><span class="deriv">troop (n. 무리, 부대)</span></div>
+    <div class="voc"><span class="w">contribute</span><span class="pos">v.</span><span class="mean">기여하다, 이바지하다</span><span class="deriv">contribution (n. 기여)</span></div>
+    <div class="voc"><span class="w">sufficient</span><span class="pos">adj.</span><span class="mean">충분한</span><span class="deriv">suffice (v.), sufficiency (n.)</span></div>
+    <div class="voc"><span class="w">nonexistent</span><span class="pos">adj.</span><span class="mean">존재하지 않는</span><span class="deriv">exist (v.), existence (n. 존재)</span></div>
+    <div class="voc"><span class="w">inadequate</span><span class="pos">adj.</span><span class="mean">부적절한, 불충분한</span><span class="deriv">adequate (adj. 적절한)</span></div>
+    <div class="voc"><span class="w">sanitation</span><span class="pos">n.</span><span class="mean">위생 (시설)</span><span class="deriv">sanitary (adj. 위생적인)</span></div>
+    <div class="voc"><span class="w">exposure</span><span class="pos">n.</span><span class="mean">노출</span><span class="deriv">expose (v. 노출시키다)</span></div>
+    <div class="voc"><span class="w">disorganized</span><span class="pos">adj.</span><span class="mean">무질서한, 체계가 없는</span><span class="deriv">organize (v.), organized (adj. 체계적인)</span></div>
+    <div class="voc"><span class="w">classify</span><span class="pos">v.</span><span class="mean">분류하다</span><span class="deriv">classification (n. 분류)</span></div>
+    <div class="voc"><span class="w">accurate</span><span class="pos">adj.</span><span class="mean">정확한</span><span class="deriv">accuracy (n.), accurately (adv.)</span></div>
+    <div class="voc"><span class="w">dedicate</span><span class="pos">v.</span><span class="mean">바치다, 헌신하다</span><span class="deriv">dedication (n.), dedicated (adj.)</span></div>
+    <div class="voc"><span class="w">uniform</span><span class="pos">adj.</span><span class="mean">통일된, 균일한</span><span class="deriv">uniformity (n.), uniformly (adv.)</span></div>
+    <div class="voc"><span class="w">previously</span><span class="pos">adv.</span><span class="mean">이전에</span><span class="deriv">previous (adj. 이전의)</span></div>
+    <div class="voc"><span class="w">witness</span><span class="pos">v.</span><span class="mean">목격하다</span><span class="deriv">witness (n. 목격자, 증인)</span></div>
+    <div class="voc"><span class="w">prevent</span><span class="pos">v.</span><span class="mean">막다, 예방하다</span><span class="deriv">prevention (n.), preventable (adj.)</span></div>
+    <div class="voc"><span class="w">persuade</span><span class="pos">v.</span><span class="mean">설득하다</span><span class="deriv">persuasion (n.), persuasive (adj.)</span></div>
+    <div class="voc"><span class="w">reform</span><span class="pos">n. / v.</span><span class="mean">개혁(하다)</span><span class="deriv">reformer (n. 개혁가)</span></div>
+    <div class="voc"><span class="w">attempt</span><span class="pos">n. / v.</span><span class="mean">시도(하다)</span><span class="deriv">&mdash;</span></div>
+    <div class="voc"><span class="w">sector</span><span class="pos">n.</span><span class="mean">부채꼴, 부문</span><span class="deriv">&mdash;</span></div>
+    <div class="voc"><span class="w">infectious</span><span class="pos">adj.</span><span class="mean">전염성의</span><span class="deriv">infect (v.), infection (n. 감염)</span></div>
+    <div class="voc"><span class="w">contagious</span><span class="pos">adj.</span><span class="mean">전염성의, 옮기 쉬운</span><span class="deriv">contagion (n. 전염)</span></div>
+    <div class="voc"><span class="w">substantial</span><span class="pos">adj.</span><span class="mean">상당한, 막대한</span><span class="deriv">substantially (adv. 상당히)</span></div>
+    <div class="voc"><span class="w">demonstrate</span><span class="pos">v.</span><span class="mean">입증하다, 보여 주다</span><span class="deriv">demonstration (n. 시연·입증)</span></div>
+    <div class="voc"><span class="w">crucial</span><span class="pos">adj.</span><span class="mean">결정적인, 중대한</span><span class="deriv">crucially (adv.)</span></div>
+    <div class="voc"><span class="w">lasting</span><span class="pos">adj.</span><span class="mean">지속적인, 오래가는</span><span class="deriv">last (v. 지속되다)</span></div>
+
+    <div class="exp-h">핵심 표현</div>
+
+    <div class="phrase"><span class="en">think of</span> &nbsp;&mdash;&nbsp; ~을 떠올리다, 생각하다</div>
+    <div class="phrase"><span class="en">take care of</span> &nbsp;&mdash;&nbsp; ~을 돌보다</div>
+    <div class="phrase"><span class="en">on the other hand</span> &nbsp;&mdash;&nbsp; 반면에, 다른 한편으로</div>
+    <div class="phrase"><span class="en">turn into</span> &nbsp;&mdash;&nbsp; ~으로 바뀌다</div>
+    <div class="phrase"><span class="en">result in</span> &nbsp;&mdash;&nbsp; ~을 초래하다, ~으로 이어지다</div>
+    <div class="phrase"><span class="en">upon[on] -ing</span> &nbsp;&mdash;&nbsp; ~하자마자</div>
+    <div class="phrase"><span class="en">deal with</span> &nbsp;&mdash;&nbsp; ~을 다루다, 감당하다</div>
+    <div class="phrase"><span class="en">such as</span> &nbsp;&mdash;&nbsp; ~와 같은 (예시)</div>
+    <div class="phrase"><span class="en">dedicate oneself to -ing</span> &nbsp;&mdash;&nbsp; ~에 헌신하다 (= devote oneself to)</div>
+    <div class="phrase"><span class="en">not only A but also B</span> &nbsp;&mdash;&nbsp; A뿐만 아니라 B도</div>
+    <div class="phrase"><span class="en">a number of / the number of</span> &nbsp;&mdash;&nbsp; 다수의 / ~의 수</div>
+    <div class="phrase"><span class="en">based on</span> &nbsp;&mdash;&nbsp; ~에 근거하여</div>
+    <div class="phrase"><span class="en">get lost</span> &nbsp;&mdash;&nbsp; 사라지다, 묻히다, 길을 잃다</div>
+    <div class="phrase"><span class="en">in an attempt to ~</span> &nbsp;&mdash;&nbsp; ~하려는 시도로</div>
+    <div class="phrase"><span class="en">at a glance</span> &nbsp;&mdash;&nbsp; 한눈에</div>
+    <div class="phrase"><span class="en">be attributed to ~</span> &nbsp;&mdash;&nbsp; ~의 탓으로 여겨지다</div>
+    <div class="phrase"><span class="en">stand for</span> &nbsp;&mdash;&nbsp; ~을 의미하다, 상징하다</div>
+    <div class="phrase"><span class="en">have an impact on ~</span> &nbsp;&mdash;&nbsp; ~에 영향을 미치다</div>
+    <div class="phrase"><span class="en">wipe out</span> &nbsp;&mdash;&nbsp; 전멸시키다, 완전히 없애다</div>
+    <div class="phrase"><span class="en">thanks to / both A and B</span> &nbsp;&mdash;&nbsp; ~덕분에 / A와 B 둘 다</div>
+  </section>
+
+  <section class="tab" id="t4">
+    <div class="sec-h"><div class="badge">4</div><h2>전문해석</h2><span class="en">Full Translation</span></div>
+
+    <div class="trans-box">
+      <div class="subsec">알려지지 않은 통계학자 나이팅게일</div>
+      <p>플로렌스 나이팅게일을 떠올리면, 당신은 아마 등불을 들고 부상병과 환자를 돌보는 여인을 그릴 것이다. 이들에 대한 그녀의 연민은 그녀의 행동을 통해 분명히 드러났다. 반면, 사람들의 생명을 구하는 방법으로서 통계에 대한 그녀의 열정은 많은 이들에게 잘 알려져 있지 않다. 1853년 10월, 러시아와 유럽 국가 동맹 사이의 갈등은 크림이라 불리는 터키 지역에서 전쟁으로 번졌다. 그 전쟁은 1853년 10월부터 1856년 3월까지 이어졌고, 수많은 사망자와 부상자를 낳았다. 크림 전쟁에서 싸우는 영국군을 돕기 위해 자신의 능력을 기여하고자, 나이팅게일은 1854년 터키 스쿠타리의 군 기지에서 간호직을 맡았다.</p>
+
+      <div class="subsec">열악한 환경과 무질서한 기록</div>
+      <p>스쿠타리 기지에 도착하자마자, 나이팅게일은 그곳에서 제대로 된 의료를 제공하는 것이 얼마나 어려울지 깨달았다. 음식, 기본 가구, 담요 같은 필수 물품은 충분하지 않았고, 때로는 아예 존재하지도 않았다. 환자들은 열악한 위생 상태를 감당해야 했는데, 그 상태는 쥐와 벼룩에 노출되면서 더욱 나빠졌다. 게다가 의료 기록은 극도로 엉망이었다. 그것은 어떤 병원도 다른 병원과 동일한 보고 체계를 쓰지 않았기 때문이었다. 각 병원은 질병을 명명하고 분류하는 방식이 서로 달랐고, 심지어 사망자 수마저 정확하지 않았다. 그래서 나이팅게일은 부상병과 환자들의 필요를 직접 돌보는 일뿐 아니라 병원의 기록 관리를 개선하는 일에도 헌신했다. 그녀는 각 사망 원인을 통일된 방식으로 기록하는 관행을 도입했는데, 이는 이전에는 없던 일이었다.</p>
+      <p>전쟁 중 수많은 비극적 죽음을 목격한 후, 나이팅게일은 불필요한 죽음을 막는 유일한 길이 군 병원의 위생 상태를 개선하는 것임을 알았다. 그래서 그녀는 광범위한 위생 개혁이 필요하다고 군 관계자와 정치인들을 설득하기로 결심했다. 당시 선도적인 통계학자였던 윌리엄 파의 도움으로, 나이팅게일은 전쟁 중 수집한 정보를 바탕으로 여러 보고서를 작성했다. 그녀는 자신의 메시지가 긴 표 목록 속에 묻혀 버리기 쉽다는 것을 알았다. 그래서 더 효과적인 방식으로 정보를 전달하려는 시도로, 그녀는 극지방 면적 그래프라는 독특한 그래프를 개발했다.</p>
+
+      <div class="subsec">극지방 면적 그래프</div>
+      <p>극지방 면적 그래프는 크림에서 영국 병사들의 사망 원인에 관한 많은 정보를 한눈에 보여 주었다. 그래프에 표시된 12개의 부채꼴은 저마다 다른 달을 나타냈다. 부채꼴의 크기는 그달에 얼마나 많은 사망이 발생했는지를 보여 주었는데, 가장 큰 부채꼴은 사망률이 가장 높은 달을 가리켰다. 각 부채꼴 안에서는 사망 원인을 나타내기 위해 세 가지 색이 사용되었다. 파란색 부분은 콜레라 같은 전염병으로 인한 사망을 나타냈다. 분홍색 부분은 부상으로 인한 사망을 보여 주었는데, 그 대부분은 전투에서 입은 것이었다. 검은색은 질병이나 부상 이외의 다른 원인으로 인한 사망을 의미했다.</p>
+
+      <div class="subsec">위생 개혁과 그 결과</div>
+      <p>나이팅게일은 이 자료를 분석하고, 사망자 수를 줄일 방법을 알아내려 애썼다. 예를 들어, 그녀는 전쟁 중 병원의 환기를 개선하고 하수를 처리하는 더 안전한 방법을 개발하려고 노력했다. 그녀의 노력은 전염병으로 인한 사망의 급격한 감소로 이어졌다. 이는 파란색 부분이 거의 사라지는 달들에서 그래프상으로 확인할 수 있다.</p>
+      <p>나이팅게일은 자신의 그래프를 통해, 전염병이 군 병원의 병사들에게 미친 막대한 영향을 효과적으로 입증했다. 사실, 만약 그 추세가 계속되었더라면 전염병은 군 전체를 전멸시켰을 것이다. 그러나 메시지를 그토록 명확하게 보여 줌으로써, 그녀는 수많은 사망이 예방될 수 있다고 사람들을 설득할 수 있었다. 그 결과, 병원에서 쓰이던 위생 절차는 대대적인 개혁을 거쳤고, 예방 가능한 사망자 수는 급격히 줄었다. 효과적인 의사소통 도구 덕분에, 그녀는 의학과 통계학 양쪽 분야에 결정적이고 지속적인 영향을 남겼다.</p>
+    </div>
+  </section>
+
+  <section class="tab" id="t5">
+    <div class="sec-h"><div class="badge">5</div><h2>주제와 요지</h2><span class="en">Topic &amp; Main Idea</span></div>
+
+    <div class="tcard">
+      <div class="lab">TOPIC &middot; 주제</div>
+      <div class="big">통계와 데이터 시각화로 위생 개혁을 이끌어 생명을 구한 나이팅게일</div>
+      <div class="body">간호사로서의 연민뿐 아니라, 극지방 면적 그래프라는 효과적인 통계 시각화를 통해 군 병원의 위생 개혁을 설득해 낸 나이팅게일의 업적.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="lab">MAIN IDEA &middot; 요지</div>
+      <div class="body">나이팅게일은 크림 전쟁 중 수집한 사망 데이터를 극지방 면적 그래프로 명확하게 시각화하여, 전염병이 사망의 주된 원인임을 보여 주고 위생 개혁을 설득했다. 그 결과 예방 가능한 사망이 급감했으며, 그녀는 의학과 통계학 모두에 지속적인 영향을 남겼다.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="lab">STRUCTURE &middot; 구조 흐름</div>
+      <div class="flow">
+        <div class="fstep"><div class="ph">도입 &middot; 반전된 인물상</div><div class="tx">'등불을 든 여인'으로만 알려진 나이팅게일 &rarr; 통계에 대한 열정은 덜 알려짐. 크림 전쟁 참전(1854) 배경 제시.</div></div>
+        <div class="fstep"><div class="ph">문제 &middot; 열악한 현실</div><div class="tx">물품 부족, 형편없는 위생, 병원마다 제각각인 무질서한 기록 &rarr; 기록 표준화에 헌신.</div></div>
+        <div class="fstep"><div class="ph">해결책 &middot; 그래프 개발</div><div class="tx">긴 표로는 메시지가 묻힘 &rarr; 윌리엄 파와 협력해 한눈에 보이는 '극지방 면적 그래프'(달별 부채꼴, 색상별 사망 원인) 개발.</div></div>
+        <div class="fstep"><div class="ph">결과 &middot; 개혁과 유산</div><div class="tx">환기·하수 개선으로 전염병 사망 급감(파란색 부분 감소) &rarr; 위생 개혁 설득 성공 &rarr; 의학·통계 양 분야에 지속적 영향.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab" id="t6">
+    <div class="sec-h"><div class="badge">6</div><h2>변형문제</h2><span class="en">Practice &middot; tap to answer</span></div>
+
+    <!-- Q1 주제 추론 -->
+    <div class="quiz" id="q1">
+      <div class="qhead"><span class="qno">1</span><span class="qtype">주제 추론</span></div>
+      <div class="qstem">다음 글의 주제로 가장 적절한 것은?</div>
+      <button class="opt" onclick="pick(this)">&#9312; 크림 전쟁이 발발하게 된 원인과 그 전개 과정</button>
+      <button class="opt" onclick="pick(this)">&#9313; 19세기 영국 군 병원의 의료 시설과 장비 현황</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9314; 나이팅게일이 통계와 그래프를 활용해 위생 개혁을 이끌고 생명을 구한 과정</button>
+      <button class="opt" onclick="pick(this)">&#9315; 콜레라 등 전염병의 감염 경로와 효과적인 치료법</button>
+      <button class="opt" onclick="pick(this)">&#9316; 훌륭한 간호사가 갖추어야 할 자질과 덕목</button>
+      <div class="explain" id="q1-ex">정답 &#9314; &mdash; 글은 나이팅게일이 사망 데이터를 '극지방 면적 그래프'로 시각화해 위생 개혁을 설득하고 예방 가능한 사망을 줄였다는 흐름이다. 전쟁의 원인이나 전염병 치료법은 세부 소재일 뿐 주제가 아니다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q1')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q2 빈칸 추론 -->
+    <div class="quiz" id="q2">
+      <div class="qhead"><span class="qno">2</span><span class="qtype">빈칸 추론</span></div>
+      <div class="qstem">다음 빈칸에 들어갈 말로 가장 적절한 것은?</div>
+      <div class="qpassage">Nightingale knew that her message might easily get lost in a long list of tables. So, she developed a unique graph to communicate the information in a more __________ way.</div>
+      <button class="opt" onclick="pick(this)">&#9312; <span class="en">complex</span></button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9313; <span class="en">effective</span></button>
+      <button class="opt" onclick="pick(this)">&#9314; <span class="en">traditional</span></button>
+      <button class="opt" onclick="pick(this)">&#9315; <span class="en">expensive</span></button>
+      <button class="opt" onclick="pick(this)">&#9316; <span class="en">private</span></button>
+      <div class="explain" id="q2-ex">정답 &#9313; &mdash; 긴 표 속에서 메시지가 묻힐 것을 우려해 한눈에 보이는 그래프를 만든 것이므로, 정보를 더 'effective(효과적인)'하게 전달하기 위해서였다. 복잡하거나 전통적인 방식은 글의 취지와 반대.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q2')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q3 어법 오류 -->
+    <div class="quiz" id="q3">
+      <div class="qhead"><span class="qno">3</span><span class="qtype">어법 오류</span></div>
+      <div class="qstem">밑줄 친 부분 중 어법상 틀린 것은?</div>
+      <div class="qpassage">The polar area graph &#9312;<u>presented</u> a great deal of information at a glance. Each of the twelve sectors displayed on the graph &#9313;<u>represented</u> a different month. The size of the sector showed &#9314;<u>how many deaths occurred</u> that month, with the largest sectors &#9315;<u>indicated</u> the months with the highest death rates. Within each sector, three colors &#9316;<u>were used</u> to show the cause of death.</div>
+      <button class="opt" onclick="pick(this)">&#9312; <span class="en">presented</span></button>
+      <button class="opt" onclick="pick(this)">&#9313; <span class="en">represented</span></button>
+      <button class="opt" onclick="pick(this)">&#9314; <span class="en">how many deaths occurred</span></button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9315; <span class="en">indicated</span></button>
+      <button class="opt" onclick="pick(this)">&#9316; <span class="en">were used</span></button>
+      <div class="explain" id="q3-ex">정답 &#9315; &mdash; 'with + 목적어 + 분사' 구문에서 목적어(the largest sectors)가 '가리키는' 능동 관계이므로 과거분사 indicated가 아니라 현재분사 indicating이 되어야 한다. 나머지는 모두 적절(과거동사 presented/represented, 간접의문문 어순, 수동태 were used).</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q3')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q4 내용 불일치 -->
+    <div class="quiz" id="q4">
+      <div class="qhead"><span class="qno">4</span><span class="qtype">내용 불일치</span></div>
+      <div class="qstem">윗글의 내용과 일치하지 <b>않는</b> 것은?</div>
+      <button class="opt" onclick="pick(this)">&#9312; 나이팅게일은 1854년 터키 스쿠타리의 군 기지에서 간호직을 맡았다.</button>
+      <button class="opt" onclick="pick(this)">&#9313; 스쿠타리 기지에는 음식, 가구, 담요 같은 필수 물품이 부족했다.</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9315; 당시 모든 병원이 동일한 보고 체계를 사용하고 있었다.</button>
+      <button class="opt" onclick="pick(this)">&#9314; 극지방 면적 그래프에서 파란색은 전염병으로 인한 사망을 나타냈다.</button>
+      <button class="opt" onclick="pick(this)">&#9316; 환기 개선과 하수 처리 노력으로 전염병으로 인한 사망이 급감했다.</button>
+      <div class="explain" id="q4-ex">정답 &#9315; &mdash; 본문에 따르면 '어떤 병원도 다른 병원과 같은 보고 체계를 쓰지 않았다(none of the hospitals were using the same reporting system)'. 모든 병원이 동일한 체계를 썼다는 것은 본문과 정반대로 불일치. 나머지는 모두 본문과 일치한다.</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q4')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <!-- Q5 글의 순서 -->
+    <div class="quiz" id="q5">
+      <div class="qhead"><span class="qno">5</span><span class="qtype">글의 순서</span></div>
+      <div class="qstem">주어진 글 다음에 이어질 순서로 가장 적절한 것은?</div>
+      <div class="qpassage" style="border-left:4px solid #2E75B6;">Within each sector, three colors were used to show the cause of death.</div>
+      <div class="qpassage"><b>(A)</b> The pink section showed deaths caused by wounds, most of which were received in combat.</div>
+      <div class="qpassage"><b>(B)</b> The blue section represented deaths attributed to infectious diseases like cholera.</div>
+      <div class="qpassage"><b>(C)</b> Black stood for deaths caused by anything other than diseases or wounds.</div>
+      <button class="opt" onclick="pick(this)">&#9312; (A) - (B) - (C)</button>
+      <button class="opt" onclick="pick(this)">&#9313; (A) - (C) - (B)</button>
+      <button class="opt" data-correct="1" onclick="pick(this)">&#9314; (B) - (A) - (C)</button>
+      <button class="opt" onclick="pick(this)">&#9315; (B) - (C) - (A)</button>
+      <button class="opt" onclick="pick(this)">&#9316; (C) - (A) - (B)</button>
+      <div class="explain" id="q5-ex">정답 &#9314; &mdash; 세 가지 색을 소개한 주어진 글 다음, (B) 파란색(전염병) &rarr; (A) 분홍색(부상) 순으로 두 원인을 제시하고, (C) 검은색은 '질병이나 부상 이외의' 원인이므로 앞의 두 색을 모두 전제한 뒤 마지막에 와야 한다. 따라서 (B)-(A)-(C).</div>
+      <div class="qbtns"><button class="reset" onclick="resetQuiz('q5')">&#8634; 다시풀기</button></div>
+    </div>
+
+    <div class="exp-h">서술형</div>
+
+    <!-- 서술형 1 -->
+    <div class="essay">
+      <div class="qhead"><span class="qno">서술형 1</span><span class="qtype">빈칸 요약</span></div>
+      <div class="qstem">다음은 글의 내용을 요약한 것이다. 빈칸 (1), (2)에 들어갈 말을 본문에서 찾아 쓰시오.</div>
+      <div class="qpassage">Nightingale dedicated herself not only to caring for soldiers directly but also to improving the hospitals' &nbsp;(1)__________. To communicate her findings effectively, she invented the polar area &nbsp;(2)__________, which showed the causes of death at a glance.</div>
+      <div class="cond">조건: 본문에 나온 표현을 그대로 사용하여 (1)은 하이픈으로 연결된 한 단어, (2)는 한 단어로 쓸 것.</div>
+      <textarea placeholder="(1) =            (2) =            처럼 답을 적어 보세요."></textarea>
+      <button class="ansbtn" onclick="toggleAns('e1')">모범답안 보기</button>
+      <div class="model" id="e1">
+        <span class="lab">모범답안</span>
+        (1) <span class="en">record-keeping</span> &nbsp;/&nbsp; (2) <span class="en">graph</span><br>
+        &rarr; 그녀는 직접적 간호뿐 아니라 병원의 '기록 관리(record-keeping)' 개선에 헌신했고, 정보를 효과적으로 전달하기 위해 극지방 면적 '그래프(graph)'를 고안했다.
+      </div>
+    </div>
+
+    <!-- 서술형 2 -->
+    <div class="essay">
+      <div class="qhead"><span class="qno">서술형 2</span><span class="qtype">영어 서술</span></div>
+      <div class="qstem">나이팅게일이 표(tables) 대신 새로운 그래프를 개발한 이유는 무엇인가? 본문을 근거로 완전한 영어 문장으로 쓰시오.</div>
+      <div class="cond">조건: 본문 내용을 근거로, 25단어 내외의 완전한 영어 문장으로 작성할 것.</div>
+      <textarea placeholder="Write your answer in one complete English sentence."></textarea>
+      <button class="ansbtn" onclick="toggleAns('e2')">모범답안 보기</button>
+      <div class="model" id="e2">
+        <span class="lab">모범답안</span>
+        <span class="en">She knew that her message might easily get lost in a long list of tables, so she developed a graph to communicate the information in a more effective way.</span><br>
+        &rarr; 긴 표 목록 속에 메시지가 묻혀 버리기 쉽다는 것을 알았기에, 정보를 더 효과적으로 전달하려고 그래프를 개발했다.
+      </div>
+    </div>
+
+  </section>
+
+  </main>
+
+<script>
+function showTab(id, btn){
+  var tabs = document.getElementsByClassName('tab');
+  for(var i=0;i<tabs.length;i++){ tabs[i].className = tabs[i].className.replace(' show',''); }
+  var t = document.getElementById(id);
+  if(t){ t.className += ' show'; }
+  var btns = document.querySelectorAll('.sb-nav button');
+  for(var j=0;j<btns.length;j++){ btns[j].className = btns[j].className.replace('active','').replace(/\s+$/,''); }
+  if(btn){ btn.className += ' active'; }
+  window.scrollTo(0,0);
+}
+
+function pick(el){
+  var quiz = el.parentNode;
+  var opts = quiz.getElementsByClassName('opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].className += ' locked';
+    opts[i].setAttribute('onclick','');
+  }
+  if(el.getAttribute('data-correct') === '1'){
+    el.className += ' correct';
+  } else {
+    el.className += ' wrong';
+    for(var k=0;k<opts.length;k++){
+      if(opts[k].getAttribute('data-correct') === '1'){ opts[k].className += ' correct'; }
+    }
+  }
+  var ex = document.getElementById(quiz.id + '-ex');
+  if(ex){ ex.className += ' show'; }
+}
+
+function resetQuiz(qid){
+  var quiz = document.getElementById(qid);
+  var opts = quiz.getElementsByClassName('opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].className = 'opt';
+    opts[i].setAttribute('onclick','pick(this)');
+  }
+  var ex = document.getElementById(qid + '-ex');
+  if(ex){ ex.className = 'explain'; }
+}
+
+function toggleAns(id){
+  var m = document.getElementById(id);
+  if(!m){ return; }
+  if(m.className.indexOf('show') > -1){ m.className = 'model'; }
+  else { m.className = 'model show'; }
+}
+</script>
+</body>
+</html>
